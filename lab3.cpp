@@ -21,7 +21,7 @@ class labmatrix
     labmatrix add(labmatrix m2);
     labmatrix substract(labmatrix m2);
     labmatrix multiply(labmatrix m2);
-    bool store(string filename,);
+    bool store(string filename, string path);
 
 };
 
@@ -88,7 +88,8 @@ int main()
     cout << "mnozenie" << endl;
     macierz2 = macierz2.multiply(macierz3);
     macierz2.print();
-    macierz2.store("dupa.txt");    
+    macierz2.store("chujdupa.txt", "C:\\Users\\proco\\cppprojects\\lab3\\");
+    //macierz2.store("\duupa.txt");    
     return 0;
 }
 
@@ -209,14 +210,15 @@ labmatrix labmatrix::multiply(labmatrix m2)
     return matrix3;
 }
 
-bool labmatrix::store(string filename)
+bool labmatrix::store(string filename, string path)
 {
     fstream mojplik;
 
     int a = row();
     int b = col();
-    
-    mojplik.open(filename, ios::out);
+    string full_file_name = path + filename;
+    cout << full_file_name;
+    mojplik.open(full_file_name, ios::out);
     
     if(mojplik.is_open())
     {
