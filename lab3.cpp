@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <fstream>
 
 using namespace std;
 
@@ -20,6 +21,7 @@ class labmatrix
     labmatrix add(labmatrix m2);
     labmatrix substract(labmatrix m2);
     labmatrix multiply(labmatrix m2);
+    bool store();
 
 };
 
@@ -47,27 +49,26 @@ int main()
     //macierz2.set(2, 2, 5);
     macierz2.print(); // dziala :)
     //proba get
-    macierz2.set(1, 1, 40);
+    macierz2.set(1, 1, 3);
     macierz2.set(1, 0, 5);
-    macierz2.set(0, 0, 40);
+    macierz2.set(0, 0, 2);
     cout << "-----macierz 2----" << endl;
     macierz2.print();
-    macierz3.set(1, 1, 8);
-    macierz3.set(1, 0, 1);
-    macierz3.set(0, 0, 2);
+    macierz3.set(1, 1, 5);
+    macierz3.set(1, 0, 3);
+    macierz3.set(0, 0, 7);
     cout << "-----macierz 3----" << endl;
     macierz3.print();
+    /*
     double a = macierz2.get(1, 1);
     cout << "proba get" << endl;
     cout << a << endl;
     cout << "-----------" << endl;
-    /*
     for(int i = 0; i < row; i++)
     {
         for(int j = 0; j < col; j++)
         (macierz2)[i][j] = i+j;
     }
-    */
     cout << "-----macierz 3----" << endl;
     macierz3.print();
 
@@ -81,11 +82,13 @@ int main()
     cout << "odejmowanie" << endl;
     macierz2 = macierz2.substract(macierz3);
     macierz2.print();
+    */
     //matrix mnozenie
     cout << "---------" << endl;
     cout << "mnozenie" << endl;
     macierz2 = macierz2.multiply(macierz3);
-    macierz2.print();    
+    macierz2.print();
+    macierz2.store();    
     return 0;
 }
 
@@ -198,11 +201,43 @@ labmatrix labmatrix::multiply(labmatrix m2)
             value = 0;
             for(int k = 0; k < row(); k++)
             {
-               value = value + matrix[i][j] * (m2.matrix)[k][j];
+               value = value + matrix[i][k] * (m2.matrix)[k][j];
             }
             (matrix3.matrix)[i][j] = value;
         }
     }
     return matrix3;
+}
+
+bool labmatrix::store()
+{
+    fstream mojplik;
+
+    int a = row();
+    int b = col();
+    
+    mojplik.open("lab3.txt", ios::out);
+    
+    if(mojplik.is_open())
+    {
+        mojplik << a << " " << b;
+        mojplik << endl;
+        for(int i = 0; i < a; i++)
+        {
+            for(int j = 0; j < b; j++)
+            {
+                mojplik << matrix[i][j];
+                mojplik << " ";
+            }
+            mojplik << endl;
+        }
+    }
+    else
+    {
+        cout << "plik otwarty nieprawidłowo" << endl;
+    }
+    
+    return true;
+
 }
 
