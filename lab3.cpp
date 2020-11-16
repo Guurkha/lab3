@@ -22,6 +22,7 @@ class labmatrix
     labmatrix substract(labmatrix m2);
     labmatrix multiply(labmatrix m2);
     bool store(string filename, string path);
+    labmatrix(string filename);
 
 };
 
@@ -90,6 +91,9 @@ int main()
     macierz2.print();
     macierz2.store("chujdupa.txt", "C:\\Users\\proco\\cppprojects\\lab3\\");
     //macierz2.store("\duupa.txt");    
+    labmatrix macierz4("C:\\Users\\proco\\cppprojects\\lab3\\chujdupa.txt");
+    cout << "wypisz macierz 4" << endl;
+    macierz4.print();
     return 0;
 }
 
@@ -240,6 +244,39 @@ bool labmatrix::store(string filename, string path)
     }
     
     return true;
+
+}
+
+labmatrix::labmatrix(string filename)
+{
+    fstream mojplik;
+    int a;
+    int b;
+    double val;
+    vector<double>row;
+
+    mojplik.open(filename, ios::in);
+
+    if(mojplik.is_open())
+    {
+        mojplik >> a;
+        mojplik >> b;
+        for(int j = 0; j < a; j++)
+        {
+            for(int i = 0; i < b; i++)
+            {
+                mojplik >> val;
+                row.push_back(val);
+            }
+            matrix.push_back(row);
+            row.clear();
+        }
+
+    }
+
+    cout << "a to " << a << endl;
+    cout << "b to " << b << endl;
+    
 
 }
 
