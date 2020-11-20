@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <fstream>
+#include <time.h>
 
 using namespace std;
 
@@ -29,71 +30,70 @@ class labmatrix
 
 int main()
 {
+    srand((unsigned) time(0));
     //wczytanie i wyswietlenie rowów i columnusów
     int row;
     int col;
+
     cout << "podaj liczbe wierszy" << endl;
     cin >> row;
     cout << "podaj liczbe kolumn" << endl;
     cin >> col;
+    //---------------proba konstruktorow----------------//
+
     //tworzenie matrixa z konstruktorem jedoargumentowym
     labmatrix macierz(row);
-    //wyswietlenie jego column, test funkcji
-    cout << "a too" << macierz.col() << endl;
-    //tworzenie dwuargumentowego 
+    //tworzenie matrixa z drugim konstruktorem
     labmatrix macierz2(row, col);
     labmatrix macierz3(row, col);
-    //sprawdzenie czy dziala.
-    //proba wypisania
-    //macierz2.print(); //dziala :)
-    //proba set
-    //macierz2.set(2, 2, 5);
-    macierz2.print(); // dziala :)
-    //proba get
+    //z pliku
+    labmatrix macierz4("C:\\Users\\proco\\cppprojects\\lab3\\plik.txt");
+    
+    //-----proba funkcji cols i rows-----------//
+    cout << "kolumny to" << macierz2.col() << endl;
+    cout << "wiersze to" << macierz2.row() << endl;
+
+    //-------proba funkcji set i get---------//
     macierz2.set(1, 1, 3);
     macierz2.set(1, 0, 5);
     macierz2.set(0, 0, 2);
-    cout << "-----macierz 2----" << endl;
-    macierz2.print();
     macierz3.set(1, 1, 5);
     macierz3.set(1, 0, 3);
     macierz3.set(0, 0, 7);
-    cout << "-----macierz 3----" << endl;
-    macierz3.print();
-    /*
-    double a = macierz2.get(1, 1);
-    cout << "proba get" << endl;
-    cout << a << endl;
-    cout << "-----------" << endl;
-    for(int i = 0; i < row; i++)
-    {
-        for(int j = 0; j < col; j++)
-        (macierz2)[i][j] = i+j;
-    }
-    cout << "-----macierz 3----" << endl;
-    macierz3.print();
+    int get = macierz2.get(1, 1);
+    cout << "test funkcji get: " << get << endl;
 
-    //matrix dodawanie
+    //--------proba funkcji print----------//
+    cout << "macierz 1:" << endl;
+    macierz.print();
+    cout << "macierz 2:" << endl;
+    macierz2.print(); 
+    cout << "macierz 3:" << endl;
+    macierz3.print(); 
+    cout << "wypisz macierz 4 (z pliku)" << endl;
+    macierz4.print();
+
+    //------add, subtract, multiply-------//
+        //matrix dodawanie
     cout << "---------" << endl;
     cout << "dodawanie" << endl;
     macierz2 = macierz2.add(macierz3);
     macierz2.print();
-    //matrix odejmowanie
+        //matrix odejmowanie
     cout << "---------" << endl;
     cout << "odejmowanie" << endl;
     macierz2 = macierz2.substract(macierz3);
     macierz2.print();
-    */
-    //matrix mnozenie
+        //matrix mnozenie
     cout << "---------" << endl;
     cout << "mnozenie" << endl;
     macierz2 = macierz2.multiply(macierz3);
     macierz2.print();
-    macierz2.store("chujdupa.txt", "C:\\Users\\proco\\cppprojects\\lab3\\");
-    //macierz2.store("\duupa.txt");    
-    labmatrix macierz4("C:\\Users\\proco\\cppprojects\\lab3\\chujdupa.txt");
-    cout << "wypisz macierz 4" << endl;
-    macierz4.print();
+    
+    //--------test  funkcji store-------//
+
+    macierz2.store("plik.txt", "C:\\Users\\proco\\cppprojects\\lab3\\");
+    
     return 0;
 }
 
