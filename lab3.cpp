@@ -157,6 +157,11 @@ labmatrix labmatrix::add(labmatrix m2)
 {
     int a = row();
     int b = col();
+    if( ! (a == m2.col() ) && (b == m2.col() ) )
+    {
+        cout << "nie mozna dodac" << endl;
+        exit(1);
+    }
     labmatrix matrix3(a, b);
     for(int i = 0; i < row(); i++)
     {
@@ -182,6 +187,11 @@ labmatrix labmatrix::substract(labmatrix m2)
 {
     int a = row();
     int b = col();
+    if( ! (a == m2.col() ) && (b == m2.col() ) )
+    {
+        cout << "nie mozna odjac" << endl;
+        exit(1);
+    }
     labmatrix matrix3(a, b);
     for(int i = 0; i < row(); i++)
     {
@@ -197,6 +207,11 @@ labmatrix labmatrix::multiply(labmatrix m2)
 {
     int a = row();
     int b = col();
+    if(!(a == m2.row()))
+    {
+        cout << "nie mozna mnozyc" << endl;
+        exit(1);
+    }
     double value = 0;
     labmatrix matrix3(a, b);
     for(int i = 0; i < row(); i++)
