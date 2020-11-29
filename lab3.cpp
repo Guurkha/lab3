@@ -2,6 +2,7 @@
 #include <vector>
 #include <fstream>
 #include <time.h>
+#include <iomanip>
 
 using namespace std;
 
@@ -63,6 +64,8 @@ int main()
     int get = macierz2.get(1, 1);
     cout << "test funkcji get: " << get << endl;
 
+    
+
     //--------proba funkcji print----------//
     cout << "macierz 1:" << endl;
     macierz.print();
@@ -72,6 +75,40 @@ int main()
     macierz3.print(); 
     cout << "wypisz macierz 4 (z pliku)" << endl;
     macierz4.print();
+
+    //--------wypelnienie macierzy----//
+    for(int i = 0; i < row; i++)
+    {
+        for(int j = 0; j < row; j++)
+        {
+        int result = 1 + (rand() % 30);
+        macierz.set(i, j, result);
+        }
+    }
+
+    for(int i = 0; i < row; i++)
+    {
+        for(int j = 0; j < col; j++)
+        {
+        int result = 1 + (rand() % 30);
+        macierz2.set(i, j, result);
+        }
+    }
+    
+    for(int i = 0; i < row; i++)
+    {
+        for(int j = 0; j < col; j++)
+        {
+        int result = 1 + (rand() % 30);
+        macierz3.set(i, j, result);
+        }
+    }
+    
+
+    macierz.print();
+    macierz2.print();
+    macierz3.print();
+
 
     //------add, subtract, multiply-------//
         //matrix dodawanie
@@ -147,7 +184,8 @@ void labmatrix::print()
     {
         for(int j = 0; j < col(); j++)
         {
-            cout << " " << matrix[i][j];
+            cout << setw(5);
+            cout << matrix[i][j];
         }
         cout << endl;
     }
@@ -294,4 +332,3 @@ labmatrix::labmatrix(string filename)
     
 
 }
-
